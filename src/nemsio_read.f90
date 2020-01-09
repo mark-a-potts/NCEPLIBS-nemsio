@@ -86,6 +86,7 @@ contains
     character(8) :: tmpgdatatype
 ! 
     if(present(iret)) iret= -31
+    if(present(iret)) iret=0
 !
     call nemsio_getfilehead(gfile,iret=ios,gdatatype=tmpgdatatype,dimx=mydimx,   &
            dimy=mydimy,dimz=mydimz,nframe=mynframe,tlmeta=mytlmeta,              &

@@ -738,6 +738,19 @@ contains
       iret=-9
       return
     endif
+
+    gfile%read_ldata%mygdatatype=gfile%gdatatype(1:4)
+    gfile%read_ldata%do_byteswap=gfile%do_byteswap
+    gfile%read_ldata%myflunit=gfile%flunit
+    gfile%read_ldata%mygfname=trim(gfile%gfname)
+    if(trim(gfile%read_ldata%mygdatatype)=='grib') then
+      gfile%read_ldata%mymbuf=256*1024
+      gfile%read_ldata%mynnum=0
+      gfile%read_ldata%mynlen=0
+      gfile%read_ldata%mymnum=-1
+      if(allocated(gfile%read_ldata%mycbuf)) deallocate(gfile%read_ldata%mycbuf)
+      allocate(gfile%read_ldata%mycbuf(gfile%read_ldata%mymbuf))
+    endif
 !------------------------------------------------------------
 ! read second meta data record
 !------------------------------------------------------------
@@ -1221,6 +1234,7 @@ contains
         gfile%tlmeta=gfile%tlmeta+nread
       enddo
     endif
+    gfile%read_ldata%mytlmeta=gfile%tlmeta
 !
 !end if extrameta
    endif
