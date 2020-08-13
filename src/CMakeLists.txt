@@ -8,11 +8,11 @@ set(fortran_src
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
   set(CMAKE_Fortran_FLAGS
-      "-g -traceback -convert big_endian -free -assume byterecl -fp-model strict -mkl"
+      "-g -traceback -convert big_endian -fPIC -free -assume byterecl -fp-model strict -mkl"
   )
   set(CMAKE_Fortran_FLAGS_RELEASE "-O2")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU|Clang|AppleClang)$")
-  set(CMAKE_Fortran_FLAGS "-g -fconvert=big-endian -ffree-form")
+  set(CMAKE_Fortran_FLAGS "-g -fconvert=big-endian -ffree-form -fPIC")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O2")
   set(CMAKE_Fortran_FLAGS_DEBUG "-ggdb -Wall")
 endif()
